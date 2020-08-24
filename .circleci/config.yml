@@ -1,6 +1,5 @@
-version: 2.1
-orbs:
-  azure-cli: johnstonjacob/azure-cli@0.1.0
+version: 2
+
 references:
 
 base_image: &base_image
@@ -19,7 +18,7 @@ default_config: &default_config
 repo_cache_key: &repo_cache_key
   v1-repo-{{ .Branch }}-{{ .Revision }}
 
-# Step to restore repository from cache1
+# Step to restore repository from cache
 restore_repo: &restore_repo
   restore_cache:
     key: *repo_cache_key
@@ -62,13 +61,7 @@ apply_job: &apply_job
           cd environments/$TERRAFORM_ENVIRONMENT
           terraform apply --auto-approve ../../terraform.plan
 jobs:
-  verify-install:
-    executor: azure-cli/default
-    steps:
-      - azure-cli/install
-      - run:
-          command: az -v
-          name: Verify Azure CLI is installed
+
   build:
     <<: *default_config
     steps:
