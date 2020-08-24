@@ -1,5 +1,6 @@
-version: 2
-
+version: 2.1
+orbs:
+  azure-cli: johnstonjacob/azure-cli@0.1.0
 references:
 
 base_image: &base_image
