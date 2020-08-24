@@ -61,7 +61,13 @@ apply_job: &apply_job
           cd environments/$TERRAFORM_ENVIRONMENT
           terraform apply --auto-approve ../../terraform.plan
 jobs:
-
+  verify-install:
+    executor: azure-cli/default
+    steps:
+      - azure-cli/install
+      - run:
+          command: az -v
+          name: Verify Azure CLI is installed
   build:
     <<: *default_config
     steps:
